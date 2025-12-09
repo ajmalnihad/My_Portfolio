@@ -1,0 +1,855 @@
+/* --- CSS VARIABLES & THEME CONFIG --- */
+:root {
+    /* Dark Theme (Default) */
+    /* --bg-color: #050505; */
+    --bg-color: #080808;
+    --text-main: #ffffff;
+    /* --text-secondary: #a1a1aa; */
+    --text-secondary: #cbd5e1;
+    --accent: #6366f1;
+    /* Indigo */
+    --accent-glow: rgba(99, 102, 241, 0.4);
+
+    /* Glassmorphism Variables */
+    --glass-bg: rgba(20, 20, 20, 0.6);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --card-hover: rgba(255, 255, 255, 0.05);
+    --nav-bg: rgba(10, 10, 10, 0.75);
+
+    /* Liquid Background Colors */
+    --orb-1: #18173b;
+    --orb-2: #35767d;
+
+}
+
+[data-theme="light"] {
+    /* --bg-color: #a7adb9; */
+    --bg-color: #e5edff;
+    --text-main: #111827;
+    --text-secondary: #4b5563;
+    --accent: #4f46e5;
+    --accent-glow: rgba(79, 70, 229, 0.3);
+
+    --glass-bg: rgba(255, 255, 255, 0.6);
+    --glass-border: rgba(0, 0, 0, 0.08);
+    --card-hover: rgba(0, 0, 0, 0.03);
+    --nav-bg: rgba(255, 255, 255, 0.85);
+    --nav-bg: rgba(0, 0, 0, 0.263);
+
+
+    --orb-1: #a5b4fc;
+    /* --orb-2: #f0abfc; */
+    --orb-2: #caabfc;
+
+}
+
+
+/* --- Light Theme Nav Name Override --- */
+[data-theme="light"] .nav-name {
+    /* വൈറ്റ് ബാക്ക്ഗ്രൗണ്ടിൽ കാണാൻ ഡാർക്ക് കളർ ഗ്രേഡിയന്റ് */
+    background: -webkit-linear-gradient(#111827, #4f46e5);
+    
+    /* ടെക്സ്റ്റ് ആയി മാത്രം കളർ വരാൻ */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    
+    /* വേണമെങ്കിൽ ചെറിയൊരു ഷാഡോ കൊടുക്കാം (Optional) */
+    text-shadow: none; 
+}
+
+
+/* --- GLOBAL RESET --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    overflow-x: hidden;
+    transition: background-color 0.5s ease, color 0.5s ease;
+    position: relative;
+}
+
+h1, h2, h3, h4 {
+    font-family: 'Outfit', sans-serif;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul {
+    list-style: none;
+}
+
+
+/* --- BACKGROUND ANIMATION (LIQUID ETHER) --- */
+#liquid-ether-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1; /* കണ്ടന്റിന് പിന്നിൽ നിൽക്കാൻ */
+    pointer-events: auto; /* മൗസ് എഫക്റ്റ് കിട്ടാൻ ഇത് "auto" ആയിരിക്കണം */
+    /* ലാഗ് കുറയ്ക്കാൻ താഴെ ഉള്ളത് ആഡ് ചെയ്യുക */
+    will-change: transform; 
+    transform: translateZ(0); /* GPU Force ചെയ്യാൻ */
+}
+
+
+
+/* --- UTILITY CLASSES --- */
+.glass-panel {
+    /* background: var(--glass-bg); */
+    background: rgba(25, 25, 25, 0.152);    
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    border-top: 1px solid rgba(255, 255, 255, 0.15); 
+    box-shadow: 0 4px 15px var(--accent-glow);
+}
+
+.section-title {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 3rem;
+    background: linear-gradient(to right, var(--text-main), var(--text-secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+section {
+    padding: 100px 0;
+}
+
+/* --- NAVIGATION (Dynamic Island Style) --- */
+/* Default: Hide Hamburger on Desktop */
+.hamburger {
+    display: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--text-main);
+}
+
+.navbar {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70%;
+    /* max-width: 500px; */
+    height: 60px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 25px;
+    z-index: 1000;
+    background: var(--nav-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(20px);
+    transition: all 0.3s ease;
+}
+
+
+.nav-name{
+  font-family: "Brush Script MT";
+  font-size: xx-large;
+  color: #e5dcdc;
+  /* text-shadow: 0 0 8px rgba(56, 189, 248, 0.8); */
+  background: -webkit-linear-gradient(#ffffff, #44627b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.nav-name:hover{
+    text-shadow: 0 0 8px rgba(190, 221, 235, 0.59);
+}
+
+.nav-links {
+    display: flex;
+    gap: 30px;
+
+}
+
+.nav-link {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    transition: 0.3s;
+    position: relative;
+    color: #ffffff;
+
+}
+
+.nav-link:hover {
+    color: #9ca3af;
+}
+.nav-link.active {
+    color: var(--text-main);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: transparent;
+    /* darker left, lighter right — you requested dark + light stops */
+    background-image: linear-gradient(120deg, #ffffff 0%, #ffffff 40%, #ffffff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.433);
+}
+
+.nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: fit-content;
+    height: 2px;
+    background: var(--accent);
+    /* border-radius: 50%; */
+}
+
+.theme-toggle {
+    cursor: pointer;
+    color: var(--text-main);
+    font-size: 1.1rem;
+    transition: transform 0.3s;
+}
+
+.theme-toggle:hover {
+    transform: rotate(15deg);
+}
+
+
+
+/* --- HERO SECTION --- */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+}
+
+.hero-content {
+    flex: 1;
+    max-width: 600px;
+}
+
+.hero-content h1 {
+    font-size: 3.5rem;
+    line-height: 1.1;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.hero-content h2 {
+    font-size: 2rem;
+    color: var(--accent);
+    margin-bottom: 20px;
+}
+
+.bio {
+    color: var(--text-secondary);
+    margin-bottom: 30px;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    max-width: 480px;
+}
+
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: 20px;
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    color: #10b981;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 25px;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    background: #10b981;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+    }
+
+    70% {
+        box-shadow: 0 0 0 10px rgba(16, 185, 129, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+    }
+}
+
+.btn-group {
+    display: flex;
+    gap: 15px;
+}
+
+.btn {
+    padding: 12px 28px;
+    border-radius: 30px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    outline: none;
+}
+
+.btn-primary {
+    background: var(--accent);
+    color: white;
+    box-shadow: 0 4px 15px var(--accent-glow);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px var(--accent-glow);
+}
+
+.btn-secondary {
+    background: transparent;
+    border: 1px solid var(--glass-border);
+    color: var(--text-main);
+}
+
+.btn-secondary:hover {
+    background: var(--card-hover);
+    border-color: var(--text-main);
+}
+
+.hero-visual {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.cube-wrapper {
+    perspective: 1000px;
+    width: 300px;
+    height: 300px;
+}
+
+/* CSS 3D Cube Animation */
+.cube {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    animation: rotateCube 10s infinite linear;
+}
+
+.face {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background: rgba(19, 47, 63, 0.919);
+    /* border: 1px solid var(--accent); */
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    /* color: var(--accent); */
+    color: #6c6b9b;
+    top: 50px;
+    left: 50px;
+    backdrop-filter: blur(5px);
+}
+
+.face:nth-child(1) {
+    transform: translateZ(100px);
+}
+
+.face:nth-child(2) {
+    transform: rotateY(90deg) translateZ(100px);
+}
+
+.face:nth-child(3) {
+    transform: rotateY(180deg) translateZ(100px);
+}
+
+.face:nth-child(4) {
+    transform: rotateY(-90deg) translateZ(100px);
+}
+
+.face:nth-child(5) {
+    transform: rotateX(90deg) translateZ(100px);
+}
+
+.face:nth-child(6) {
+    transform: rotateX(-90deg) translateZ(100px);
+}
+
+@keyframes rotateCube {
+    from {
+        transform: rotateX(0deg) rotateY(0deg);
+    }
+
+    to {
+        transform: rotateX(360deg) rotateY(360deg);
+    }
+}
+
+/* --- ABOUT SECTION --- */
+.about-grid {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 50px;
+    align-items: center;
+}
+
+.about-img {
+    width: 100%;
+    height: 350px;
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 0 10px #4b5563;
+}
+
+.about-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: scale 0.5s;
+}
+
+.about-img:hover img {
+    scale: 1.05;
+}
+
+.about-img:hover{
+        box-shadow: 0 0 20px #479ba4;
+}
+[data-theme="light"] .about-img:hover {
+        box-shadow: 0 5px 30px #122224;
+
+}
+.about-text {
+    color: var(--text-secondary);
+    line-height: 1.8;
+    font-size: 1.1rem;
+}
+
+.tech-stack-badges {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.badge {
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    background: var(--card-hover);
+    border: 1px solid var(--glass-border);
+    color: var(--text-main);
+}
+
+/* --- SKILLS SECTION --- */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 20px;
+}
+
+.skill-card {
+    padding: 25px;
+    border-radius: 16px;
+    text-align: center;
+    transition: all 0.3s ease;
+    cursor: default;
+}
+
+.skill-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    border-color: var(--accent);
+    box-shadow: 0 0 20px var(--accent-glow);
+}
+
+.skill-icon {
+    font-size: 2.5rem;
+    color: var(--accent);
+    margin-bottom: 15px;
+}
+
+.skill-name {
+    font-weight: 600;
+}
+
+/* --- PROJECTS SECTION --- */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+}
+
+.project-card {
+    border-radius: 20px;
+    overflow: hidden;
+    transition: 0.4s;
+    transform-style: preserve-3d;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.project-img {
+    height: 200px;
+    overflow: hidden;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.project-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 0.5s;
+}
+
+.project-card:hover .project-img img {
+    transform: scale(1.1);
+}
+
+.project-info {
+    padding: 25px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.project-title {
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.project-desc {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    margin-bottom: 15px;
+    flex-grow: 1;
+}
+
+.project-tech {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    font-size: 0.75rem;
+}
+
+.tech-tag {
+    padding: 4px 10px;
+    border-radius: 4px;
+    background: rgba(99, 102, 241, 0.15);
+    color: var(--accent);
+}
+
+/* --- EXPERIENCE & EDUCATION (Wide Cards) --- */
+.timeline-container {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.wide-card {
+    padding: 30px;
+    border-radius: 20px;
+    display: flex;
+    gap: 20px;
+    transition: 0.3s;
+    align-items: flex-start;
+}
+
+.wide-card:hover {
+    border-color: var(--accent);
+    transform: translateX(10px);
+}
+
+.card-icon {
+    min-width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    background: var(--card-hover);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent);
+    font-size: 1.5rem;
+}
+
+.card-details h3 {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+}
+
+.card-details h4 {
+    font-size: 1rem;
+    color: var(--accent);
+    margin-bottom: 5px;
+}
+
+.card-details .date {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 15px;
+    display: block;
+}
+
+.card-details ul {
+    margin-left: 20px;
+    list-style: disc;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+.card-details li {
+    margin-bottom: 5px;
+}
+
+.edu-desc {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+/* --- CONTACT SECTION --- */
+.contact-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 0 12px #35767d;
+}
+.btn-primary2{
+    background: #ffffffb6;
+    color: rgb(36, 35, 35);
+    box-shadow: 0 4px 15px var(--accent-glow);
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 15px;
+    border-radius: 10px;
+    background: var(--card-hover);
+    border: 1px solid var(--glass-border);
+    color: var(--text-main);
+    font-size: 1rem;
+    transition: 0.3s;
+}
+
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: var(--accent);
+    outline: none;
+    background: rgba(99, 102, 241, 0.05);
+}
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.contact-info h3 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.contact-info p {
+    color: var(--text-secondary);
+    margin-bottom: 30px;
+}
+
+.social-links {
+    display: flex;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.social-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* border: 1px solid rgba(0, 0, 0, 0.826); */
+    font-size: 1.2rem;
+    transition: 0.3s;
+    box-shadow: 0 0 12px #18173b;
+}
+
+.social-btn:hover {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+    transform: translateY(-5px);
+}
+
+/* --- FOOTER --- */
+footer {
+    padding: 40px 0;
+    text-align: center;
+    border-top: 1px solid var(--glass-border);
+    margin-top: 50px;
+}
+
+footer p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 768px) {
+    .hero {
+        /* flex-direction: column-reverse; */
+        flex-direction: column;
+        justify-content: center;
+        gap: 50px;
+        text-align: center;
+        padding-top: 120px;
+    }
+
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+
+    .btn-group {
+        justify-content: center;
+    }
+
+    .status-badge {
+        margin: 0 auto 20px auto;
+    }
+
+    .about-grid,
+    .contact-wrapper {
+        grid-template-columns: 1fr;
+    }
+
+    .navbar {
+        /* bottom: 20px; */
+        /* top: auto; */
+        top: 20px   ;
+        width: 90%;
+    }
+
+    /* .nav-name{
+        display: none;
+    } */
+
+    .wide-card {
+        flex-direction: column;
+    }
+
+    .timeline-container {
+        padding: 0 10px;
+    }
+}
+/* --- RESPONSIVE MOBILE MENU --- */
+@media (max-width: 768px) {
+
+    /* 1. Navbar Adjustments */
+    .navbar {
+        width: 80%;
+        padding: 0 20px;
+        justify-content: flex-end; /* Items അകലത്തിൽ നിൽക്കാൻ */
+    }
+
+    /* 2. പേര് മൊബൈലിൽ കാണിക്കാൻ (പഴയ display: none മാറ്റുക) */
+    .nav-name {
+        display: block; /* പഴയ code-ൽ ഇത് none ആയിരുന്നു */
+        font-size: 1.5rem; /* ഫോണ്ട് സൈസ് അല്പം കുറയ്ക്കാം */
+        padding-right: 30%;
+    }
+
+    /* 3. Show Hamburger Icon */
+    .hamburger {
+        display: block;
+        order: 3; /* വലതുവശത്ത് വരാൻ */
+    }
+
+    /* 4. Theme Button Position */
+    .theme-toggle {
+        order: 2; /* ഹാംബർഗറിന് മുൻപ് വരാൻ */
+        margin-right: 15px;
+    }
+
+    /* 5. Hide Links by Default & Style Dropdown */
+    .nav-links {
+        position: absolute;
+        top: 70px; /* ബാറിന് തൊട്ടു താഴെ */
+        left: 0;
+        width: 100%;
+        background: var(--nav-bg); /* ഗ്ലാസ് ബാക്ക്ഗ്രൗണ്ട് */
+        backdrop-filter: blur(20px);
+        border: 1px solid var(--glass-border);
+        border-radius: 20px;
+
+        flex-direction: column; /* താഴേക്ക് താഴേക്ക് വരാൻ */
+        align-items: center;
+        gap: 20px;
+        padding: 20px 0;
+
+        /* Animation Setup */
+        display: none; /* ആദ്യം ഹൈഡ് ചെയ്യുന്നു */
+        opacity: 0;
+        transform: translateY(-20px);
+        transition: all 0.3s ease;
+    }
+
+    /* 6. Active Class (JS വഴി ഇത് ആഡ് ചെയ്യും) */
+    .nav-links.mobile-menu-active {
+        display: flex;
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (min-width: 769px) and (max-width: 850px) {
+    .navbar {
+        width: 85%; 
+    }
+}
