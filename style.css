@@ -174,8 +174,10 @@ section {
 
 
 .nav-name{
-  font-family: "Brush Script MT";
-  font-size: xx-large;
+  font-family: 'Great Vibes', cursive;
+  font-size: 2rem;
+  letter-spacing: 2px;
+
   color: #e5dcdc;
   /* text-shadow: 0 0 8px rgba(56, 189, 248, 0.8); */
   background: -webkit-linear-gradient(#ffffff, #44627b);
@@ -798,53 +800,54 @@ footer p {
 /* --- RESPONSIVE MOBILE MENU --- */
 @media (max-width: 768px) {
 
-    /* 1. Navbar Adjustments */
     .navbar {
         width: 80%;
         padding: 0 20px;
-        justify-content: flex-end; /* Items അകലത്തിൽ നിൽക്കാൻ */
+        justify-content: space-evenly; 
     }
 
-    /* 2. പേര് മൊബൈലിൽ കാണിക്കാൻ (പഴയ display: none മാറ്റുക) */
     .nav-name {
-        display: block; /* പഴയ code-ൽ ഇത് none ആയിരുന്നു */
-        font-size: 1.5rem; /* ഫോണ്ട് സൈസ് അല്പം കുറയ്ക്കാം */
-        padding-right: 30%;
+        display: block; 
+        order: 2;
+        font-size: 1.8rem; 
+        padding-right: 0;
+        text-align: center;
+        flex-grow: 1;
     }
 
-    /* 3. Show Hamburger Icon */
     .hamburger {
         display: block;
-        order: 3; /* വലതുവശത്ത് വരാൻ */
+        order: 3; 
+        margin-left: 0;
     }
 
-    /* 4. Theme Button Position */
     .theme-toggle {
-        order: 2; /* ഹാംബർഗറിന് മുൻപ് വരാൻ */
-        margin-right: 15px;
+        order: 1; 
+        margin-right: 0;
     }
 
-    /* 5. Hide Links by Default & Style Dropdown */
     .nav-links {
         position: absolute;
-        top: 70px; /* ബാറിന് തൊട്ടു താഴെ */
+        top: 70px;
         left: 0;
         width: 100%;
-        background: var(--nav-bg); /* ഗ്ലാസ് ബാക്ക്ഗ്രൗണ്ട് */
+        /* background: var(--nav-bg); */
+        background: rgba(10, 10, 10, 0.958);
         backdrop-filter: blur(20px);
         border: 1px solid var(--glass-border);
         border-radius: 20px;
 
-        flex-direction: column; /* താഴേക്ക് താഴേക്ക് വരാൻ */
+        flex-direction: column; 
         align-items: center;
         gap: 20px;
         padding: 20px 0;
 
         /* Animation Setup */
-        display: none; /* ആദ്യം ഹൈഡ് ചെയ്യുന്നു */
+        display: none;
         opacity: 0;
         transform: translateY(-20px);
         transition: all 0.3s ease;
+        z-index: 9999;
     }
 
     /* 6. Active Class (JS വഴി ഇത് ആഡ് ചെയ്യും) */
