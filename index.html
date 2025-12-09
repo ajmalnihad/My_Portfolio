@@ -309,21 +309,29 @@
     <script>
     window.addEventListener('load', function() {
         if(window.LiquidEther) {
+            // സ്ക്രീൻ മൊബൈൽ ആണോ എന്ന് പരിശോധിക്കുന്നു (768px ൽ താഴെ)
+            const isMobile = window.innerWidth < 768;
+
             LiquidEther('liquid-ether-container', {
                 colors: ['#18173b', '#35767d', '#6366f1'],
+                isViscous: false,
+
+                // --- ഇവിടെയാണ് മാറ്റം വരുത്തിയത് ---
                 
-                // --- Performance Fixes Below ---
+                // മൊബൈൽ ആണെങ്കിൽ 0.25 മതി, ഡെസ്ക്ടോപ്പ് ആണെങ്കിൽ 0.5 (ക്വാളിറ്റിക്ക്)
+                resolution: 0.25, 
                 
-                resolution: 0.25,  // പഴയത് 0.5 ആയിരുന്നു. ഇത് കുറച്ചാൽ ലാഗ് മാറും.
+                // മൊബൈൽ ആണെങ്കിൽ പെർഫോമൻസ് കൂട്ടാൻ കണക്കുകൂട്ടലുകൾ കുറയ്ക്കുന്നു
+                iterationsViscous: isMobile ? 20 : 32, 
+                iterationsPoisson: isMobile ? 20 : 32, 
                 
-                iterationsViscous: 20, // 32 ൽ നിന്ന് 20 ആക്കി. കണക്കുകൂട്ടൽ കുറയും.
-                iterationsPoisson: 20, // ഇതും കുറച്ചു.
+                // പ്രധാനം: മൊബൈൽ ആണെങ്കിൽ 0.015 (സ്മൂത്ത് & സ്ലോ), ഡെസ്ക്ടോപ്പ് ആണെങ്കിൽ 0.03 (ഫാസ്റ്റ്)
+                dt: isMobile ? 0.015 : 0.03, 
                 
-                dt: 0.03, // മൗസ് ലാഗ് മാറാൻ ഇത് കൂട്ടുക (Speed of simulation).
-                mouseForce: 60, // മൗസ് തൊടുമ്പോൾ പെട്ടെന്ന് റിയാക്ഷൻ കിട്ടാൻ ഇത് കൂട്ടുക.
-                cursorSize: 40, // കുറച്ചുകൂടി ഷാർപ്പ് ആയ എഫക്റ്റിന്.
+                // മൊബൈലിൽ ടച്ച് ചെയ്യുമ്പോൾ ഓവർ റിയാക്ഷൻ ഒഴിവാക്കാൻ ഫോഴ്സ് കുറയ്ക്കുന്നു
+                mouseForce: isMobile ? 20 : 60, 
                 
-                isViscous: false // ഇത് false ആണെന്ന് ഉറപ്പ് വരുത്തുക.
+                cursorSize: isMobile ? 50 : 40 
             });
         }
     });
