@@ -116,8 +116,7 @@ document.addEventListener('click', (e) => {
     }
 });
 
-
-// --- Contact Form Handling (No Redirect) ---
+// --- Contact Form Handling with SweetAlert2 ---
 const contactForm = document.getElementById('contactForm');
 
 contactForm.addEventListener('submit', function(e) {
@@ -143,17 +142,48 @@ contactForm.addEventListener('submit', function(e) {
         .then(async (response) => {
             let json = await response.json();
             if (response.status == 200) {
-                // Success Message (Alert)
-                alert("Message Sent Successfully! Thank you.");
+                
+                // --- SUCCESS: പഴയ alert() മാറ്റി ഇത് കൊടുത്തു ---
+                Swal.fire({
+                    title: 'Message Sent!',
+                    text: 'Thank you for reaching out. I will get back to you soon.',
+                    icon: 'success',
+                    confirmButtonText: 'Great!',
+                    confirmButtonColor: '#6366f1', // Button Color
+                    background: 'rgba(20, 20, 20, 0.9)', // Glass Dark Background
+                    color: '#ffffff', // Text Color
+                    backdrop: `
+                        rgba(99, 102, 241, 0.1)
+                        left top
+                        no-repeat
+                    `
+                });
+                // ----------------------------------------------
+
                 contactForm.reset(); // ഫോം ക്ലിയർ ചെയ്യുന്നു
             } else {
                 console.log(response);
-                alert("Something went wrong!");
+                
+                // --- ERROR: പഴയ alert() മാറ്റി ഇത് കൊടുത്തു ---
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Something went wrong! Please try again.',
+                    background: 'rgba(20, 20, 20, 0.9)',
+                    color: '#ffffff'
+                });
+                // --------------------------------------------
             }
         })
         .catch(error => {
             console.log(error);
-            alert("Something went wrong!");
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Something went wrong!',
+                background: 'rgba(20, 20, 20, 0.9)',
+                color: '#ffffff'
+            });
         })
         .then(function() {
             // ബട്ടൺ ടെക്സ്റ്റ് പഴയത് പോലെ ആക്കുന്നു
